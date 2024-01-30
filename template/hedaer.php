@@ -1,3 +1,9 @@
+<?php
+include_once ('functions/functions.php');
+loginCheckAndRedirect("template/login.php");
+
+?>
+
 <!DOCTYPE html>
 <html>
 <head>
