@@ -1,5 +1,6 @@
 <?php
-include_once ('functions/functions.php');
+ include_once $_SERVER['DOCUMENT_ROOT'] . "/admin-brick/functions/functions.php";
+
 loginCheckAndRedirect("template/login.php");
 
 ?>
@@ -13,7 +14,7 @@ loginCheckAndRedirect("template/login.php");
   <!-- Tell the browser to be responsive to screen width -->
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <!-- Font Awesome -->
-  <link rel="stylesheet" href="plugins/font-awesome/css/font-awesome.min.css">
+  <link rel="stylesheet" href="<?php $_SERVER['DOCUMENT_ROOT'] . "/admin-brick"?>/plugins/font-awesome/css/font-awesome.min.css">
   <!-- Ionicons -->
   <link rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
   <!-- Theme style -->
@@ -33,9 +34,9 @@ loginCheckAndRedirect("template/login.php");
   <!-- Google Font: Source Sans Pro -->
   <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
   <!-- bootstrap rtl -->
-  <link rel="stylesheet" href="dist/css/bootstrap-rtl.min.css">
+  <link rel="stylesheet" href="http://localhost/admin-brick/dist/css/bootstrap-rtl.min.css">
   <!-- template rtl version -->
-  <link rel="stylesheet" href="dist/css/custom-style.css">
+  <link rel="stylesheet" href="<?php echo $_SERVER['DOCUMENT_ROOT'] . "/admin-brick"?>/dist/css/custom-style.css">
 
 </head>
 <body class="hold-transition sidebar-mini">
@@ -94,7 +95,7 @@ loginCheckAndRedirect("template/login.php");
                   </a>
                 </li>
                 <li class="nav-item">
-                  <a href="pages/charts/flot.html" class="nav-link">
+                  <a href="template/list-users.php" class="nav-link">
                     <i class="fa fa-list nav-icon"></i>
                     <p>لیست کاربران</p>
                   </a>

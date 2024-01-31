@@ -16,7 +16,7 @@
             session_start();
             $_SESSION['loggedin'] = true;
             $_SESSION['username'] = $username;
-            header("Location: admin");
+            header("Location: http://localhost/admin-brick");
         } else {
             // اگر کاربر معمولی است، ورود انجام می‌شود
             session_start();
