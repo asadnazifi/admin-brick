@@ -14,32 +14,28 @@
          <div class="col-12">
             <div class="card">
                 <div class="card-header">
-                    <h3 class="card-title"><a href="http://<?php echo $_SERVER['HTTP_HOST'];?>/admin-brick/template/create-user.php" class="btn btn-info float-right bg-primary"><i class="fa fa-plus"></i>افزودن کاربر</a></h3>
+                    <h3 class="card-title"><a href="http://<?php echo $_SERVER['HTTP_HOST'];?>/admin-brick/template/create-categoreis.php" class="btn btn-info float-right bg-primary"><i class="fa fa-plus"></i>افزودن دسته بندی</a></h3>
 
                 </div>
                 <!-- /.card-header -->
                 <div class="card-body table-responsive p-0">
                     <table class="table table-hover">
                         <tbody><tr>
-                            <th>ایدی کاربر</th>
-                            <th>نام کاربر</th>
-                            <th>جیمیل کاربر</th>
-                            <th>نقش</th>
+                            <th>ایدی دسته بندی</th>
+                            <th>نام دسته بندی</th>
                             <th>عملیات</th>
                         
                         </tr>
-                        <?php $results= export_to_db("users");?>
+                        <?php $results= export_to_db("caetgories");?>
                             
                         <?php while($row = $results->fetch_assoc()):?>
                         <tr>
                             
-                            <td><?php echo $row['user_id'];?></td>
-                            <td><?php echo $row['firstname'];?></td>
-                            <td><?php echo $row['gmail'];?></td>
-                            <td><span class="badge badge-success"><?php echo $row['role'];?></span></td>
+                            <td><?php echo $row['categore_id'];?></td>
+                            <td><?php echo $row['name_categore'];?></td>
                             <td>
-                                <a href="edit-user.php?edit_user=<?php echo $row['user_id']; ?>"><i class="nav-icon fa fa-edit"></i></a>
-                                <a href="../functions/functions.php?user_delete=<?php echo $row['user_id']; ?>"><i class="nav-icon fa fa-trash"></i></a>
+                                <a href="edit_categore.php?edit_categories=<?php echo $row['categore_id']; ?>"><i class="nav-icon fa fa-edit"></i></a>
+                                <a href="../functions/functions.php?categories_delete=<?php echo $row['categore_id']; ?>"><i class="nav-icon fa fa-trash"></i></a>
                             </td>
                             
                         </tr>

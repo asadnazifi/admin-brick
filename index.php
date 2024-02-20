@@ -1,4 +1,4 @@
-<?php include_once ("template/hedaer.php");?>
+<?php include_once ("./template/hedaer.php");?>
 
   <!-- Content Wrapper. Contains page content -->
   <div class="content-wrapper">
