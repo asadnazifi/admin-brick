@@ -160,6 +160,26 @@ function update_data_in_database($table_name, $primary_key,$name_primary_key, $f
 
     return $result;
 }
+function join_date_in_db($name_tabel_one,$select_date_tabel_one,$name_tabel_to,$select_data_tabel_to,$primery_tabel_one,$primery_tabel_to){
+    require_once $_SERVER['DOCUMENT_ROOT'] . "/admin-brick/functions/contect-to-db.php";
+    $query_join = "SELECT $name_tabel_one.$select_date_tabel_one, $name_tabel_to.$select_data_tabel_to FROM $name_tabel_one JOIN $name_tabel_to ON $name_tabel_one.$primery_tabel_one = $name_tabel_to.$primery_tabel_to";
+    $query_result = $conn->query($query_join);
+    
+    // بررسی نتیجه
+    if ($query_result->num_rows > 0) {
+        // عملیات استخراج داده‌ها
+        $results = $query_result;
+           
+    } else {
+        echo "هیچ نتیجه‌ای یافت نشد";
+    }
+
+    //بستن اتصال به دیتابیس
+    $conn->close();
+
+    //ریترن نتیجه یا هر چیزی که نیاز است
+    return $results;
+}
 
 if(isset($_GET['user_delete'])){
     $user_id = intval($_GET['user_delete']);

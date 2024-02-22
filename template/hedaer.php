@@ -123,39 +123,27 @@ loginCheckAndRedirect("template/login.php");
                     <p>اضافه کردن دسته بندی</p>
                   </a>
                 </li>
-                <li class="nav-item">
-                  <a href="pages/UI/buttons.html" class="nav-link">
-                    <i class="fa fa-circle-o nav-icon"></i>
-                    <p>دکمه‌ها</p>
-                  </a>
-                </li>
-                <li class="nav-item">
-                  <a href="pages/UI/sliders.html" class="nav-link">
-                    <i class="fa fa-circle-o nav-icon"></i>
-                    <p>اسلایدر‌ها</p>
-                  </a>
-                </li>
               </ul>
             </li>
             <li class="nav-item has-treeview">
               <a href="#" class="nav-link">
                 <i class="nav-icon fa fa-edit"></i>
                 <p>
-                  فرم‌ها
+                  محصولات
                   <i class="fa fa-angle-left right"></i>
                 </p>
               </a>
               <ul class="nav nav-treeview">
                 <li class="nav-item">
-                  <a href="pages/forms/general.html" class="nav-link">
+                  <a href="http://<?php echo $_SERVER['HTTP_HOST'];?>/admin-brick/template/list-products.php" class="nav-link">
                     <i class="fa fa-circle-o nav-icon"></i>
-                    <p>اجزا عمومی</p>
+                    <p>لیست محصولات</p>
                   </a>
                 </li>
                 <li class="nav-item">
-                  <a href="pages/forms/advanced.html" class="nav-link">
+                  <a href="http://<?php echo $_SERVER['HTTP_HOST'];?>/admin-brick/template/create-products.php" class="nav-link">
                     <i class="fa fa-circle-o nav-icon"></i>
-                    <p>پیشرفته</p>
+                    <p>اضافه کردن محصول</p>
                   </a>
                 </li>
                 <li class="nav-item">
