@@ -40,7 +40,7 @@
                             <td><img width="40" height="40" src="http://<?php echo $_SERVER['HTTP_HOST'];?>/admin-brick/uploads_img_product/<?php echo $row['img_url'];?>" alt=""></td>
                             <td><span class="badge badge-success"><?php echo $row['name_categore'];?></span></td>
                             <td>
-                                <a href="edit-user.php?edit_product=<?php echo $row['product_id']; ?>"><i class="nav-icon fa fa-edit"></i></a>
+                                <a href="edit-product.php?edit_product=<?php echo $row['product_id']; ?>"><i class="nav-icon fa fa-edit"></i></a>
                                 <a href="../functions/functions.php?product_delete=<?php echo $row['product_id']; ?>"><i class="nav-icon fa fa-trash"></i></a>
                             </td>
                             

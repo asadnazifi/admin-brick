@@ -146,19 +146,14 @@ loginCheckAndRedirect("template/login.php");
                     <p>اضافه کردن محصول</p>
                   </a>
                 </li>
-                <li class="nav-item">
-                  <a href="pages/forms/editors.html" class="nav-link">
-                    <i class="fa fa-circle-o nav-icon"></i>
-                    <p>ویشرایشگر</p>
-                  </a>
-                </li>
+                
               </ul>
             </li>
             <li class="nav-item has-treeview">
               <a href="#" class="nav-link">
                 <i class="nav-icon fa fa-table"></i>
                 <p>
-                  جداول
+                  سفارشات
                   <i class="fa fa-angle-left right"></i>
                 </p>
               </a>
@@ -166,15 +161,10 @@ loginCheckAndRedirect("template/login.php");
                 <li class="nav-item">
                   <a href="pages/tables/simple.html" class="nav-link">
                     <i class="fa fa-circle-o nav-icon"></i>
-                    <p>جداول ساده</p>
+                    <p>لیست سفارشات</p>
                   </a>
                 </li>
-                <li class="nav-item">
-                  <a href="pages/tables/data.html" class="nav-link">
-                    <i class="fa fa-circle-o nav-icon"></i>
-                    <p>جداول داده</p>
-                  </a>
-                </li>
+               
               </ul>
             </li>
             <li class="nav-header">مثال‌ها</li>

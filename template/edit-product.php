@@ -26,28 +26,30 @@
                     <label for="name_product" class="col-sm-2 control-label">نام محصول</label>
 
                     <div class="col-sm-10">
-                      <input type="text" class="form-control" name="name_product" id="name_product" placeholder="نام محصول را وارد کنید">
+                      <input type="text" class="form-control" name="name_product" id="name_product" value = "<?php echo $row['name_product'];?>" placeholder="نام محصول را وارد کنید">
                     </div>
                   </div>
                   <div class="form-group">
                     <label for="price" class="col-sm-2 control-label">قیمت محصول</label>
 
                     <div class="col-sm-10">
-                      <input type="number" class="form-control" name="price" id="price" placeholder="قیمت محصول را وارد کنید">
+                      <input type="number" class="form-control" name="price" id="price" value = "<?php echo $row['price'];?>" placeholder="قیمت محصول را وارد کنید">
+                      <input type="hidden" class="form-control" name="product_id" value = "<?php echo $row['product_id'];?>">
+
                     </div>
                   </div>
                   <div class="form-group">
                     <label for="description_long_text" class="col-sm-2 control-label">توضیحات کوتاه محصول</label>
 
                     <div class="col-sm-10">
-                      <textarea class="form-control" name = "description_long_text" id="description_long_text" cols="30" rows="10">توضیحات کوتاه محصول</textarea>
+                      <textarea class="form-control" name = "description_long"  id="description_long_text" cols="30" rows="10"><?php echo $row['description_long'];?></textarea>
                     </div>
                   </div>
                   <div class="form-group">
                     <label for="description_text" class="col-sm-2 control-label">توضیحات محصول</label>
 
                     <div class="col-sm-10">
-                      <textarea class="form-control" name = "description_text" id="description_text" cols="30" rows="50">توضیحات کوتاه محصول</textarea>
+                      <textarea class="form-control" name = "description" id="description_text" cols="30" rows="50"><?php echo $row['description'];?></textarea>
                     </div>
                   </div>
                   <div class="form-group">
@@ -64,14 +66,15 @@
                     </div>                    
                     <div class="form-group">
                     <label>دسته بندی ها</label>
-                    <select class="form-control" name= "categories">
-                    <?php $results= export_to_db("caetgories");?>
+                    <select class="form-control" name= "categories_id">
+                    
+
+                    <?php $cate= export_to_db("caetgories");?>
                             
-                    <?php while($row = $results->fetch_assoc()):?>
-                      <option value = "<?php echo $row['categore_id'];?>"><?php echo $row['name_categore'];?></option>
+                    <?php while($categores = $cate->fetch_assoc()):?>
+                      <option <?php if($categores['categore_id'] == $row['categories_id'])echo "selected";?> value = "<?php echo $categores['categore_id'];?>"><?php echo $categores['name_categore'];?></option>
 
                     <?php endwhile;?>
-                      
                     </select>
                   </div>
 
@@ -80,11 +83,12 @@
                 
                 <!-- /.card-body -->
                 <div class="card-footer">
-                  <button type="submit" name = "update_product_to_db" class="btn btn-info">ایجاد کردن</button>
+                  <button type="submit" name = "update_product_to_db" class="btn btn-info">ویراش کردن</button>
                 </div>
                 <!-- /.card-footer -->
               </form>
               <?php endwhile;?>
+
             </div>
     </div>
 

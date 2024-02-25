@@ -5,7 +5,8 @@ $password = ""; // رمز عبور دیتابیس
 $dbname = "Brick"; // نام دیتابیس
 
 // اتصال به دیتابیس
-$conn = mysqli_connect($servername, $username, $password, $dbname);
+global $conn;
+ $conn = mysqli_connect($servername, $username, $password, $dbname);
 
 // بررسی اتصال
 if (!$conn) {

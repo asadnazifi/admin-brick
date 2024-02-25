@@ -13,7 +13,7 @@ function loginCheckAndRedirect($loginPage) {
 }
 function export_to_db($db_name) {
     require_once $_SERVER['DOCUMENT_ROOT'] . "/admin-brick/functions/contect-to-db.php";
-   
+   global $conn;
     // اجرای کوئری مورد نظر
     $querys ="SELECT * FROM `$db_name` ";
     
@@ -30,7 +30,6 @@ function export_to_db($db_name) {
     }
 
     //بستن اتصال به دیتابیس
-    $conn->close();
 
     //ریترن نتیجه یا هر چیزی که نیاز است
     return $results;
@@ -134,10 +133,7 @@ function edit_data_db($coulem_name,$select_tabel,$equal_where_tabel){
         echo "هیچ نتیجه‌ای یافت نشد";
     }
 
-    //بستن اتصال به دیتابیس
-    $conn->close();
 
-    //ریترن نتیجه یا هر چیزی که نیاز است
     return $results;
 
 }
@@ -175,7 +171,6 @@ function join_date_in_db($name_tabel_one,$select_date_tabel_one,$name_tabel_to,$
     }
 
     //بستن اتصال به دیتابیس
-    $conn->close();
 
     //ریترن نتیجه یا هر چیزی که نیاز است
     return $results;
@@ -203,17 +198,12 @@ function uplode_file($name_file){
         
     }
 
-    if ($uploadOk == 0) {
-        session_start();
-        set_flash_message("فایل اپلود نشد");
-        reddirckt_back_url();
-    } else {
-        if (move_uploaded_file($name_file["tmp_name"], $target_file)) {
+     if (move_uploaded_file($name_file["tmp_name"], $target_file)) {
         return basename($name_file["name"]);
         } else {
             return false;
         }
-    }
+    
 }
 
 if(isset($_GET['user_delete'])){
@@ -353,6 +343,29 @@ if(isset($_GET['product_delete'])){
         header('Location: http://localhost/admin-brick/template/list-products.php');
     }
 }
+if(isset($_POST['update_product_to_db'])){
+    $form_data = $_POST;
+    $primary_key = $_POST['product_id'];
+    $table_name = 'products'; 
+    if(!isset($_FILES['img_url'])&empty($_FILES['img_url'])){
+        $adres_url = uplode_file($_FILES['img_url']);
+        $form_data['img_ur;']=$adres_url;
+        $update_result = update_data_in_database($table_name, $primary_key, "product_id",$form_data,'update_product_to_db');
+        if($update_result){
+            session_start();
+            set_flash_message("محصول با موفقیت ویرایش شد");
+            header("Location: http://localhost/admin-brick/template/list-products.php");
+    
+        }
+    }
 
+    $update_result = update_data_in_database($table_name, $primary_key, "product_id",$form_data,'update_product_to_db');
+    if($update_result){
+        session_start();
+        set_flash_message("محصول با موفقیت ویرایش شد");
+        header("Location: http://localhost/admin-brick/template/list-products.php");
+
+    }
+}
 
 
