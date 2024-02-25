@@ -4,7 +4,7 @@
       <div class="container-fluid">
         <div class="row mb-2">
           <div class="col-sm-6">
-            <h1 class="m-0 text-dark">ایجاد محصول</h1>
+            <h1 class="m-0 text-dark">ویرایش محصول</h1>
           </div><!-- /.col -->
       
       </div><!-- /.container-fluid -->
@@ -14,10 +14,12 @@
     <div class="col-12">
     <div class="card card-info">
               <div class="card-header">
-                <h3 class="card-title">فرم ایجاد محصول</h3>
+                <h3 class="card-title">فرم ویرایش  محصول</h3>
               </div>
               <!-- /.card-header -->
               <!-- form start -->
+              <?php $resulte = edit_data_db('products','product_id',$_GET['edit_product']);?>
+              <?php while($row = $resulte->fetch_assoc()):?>
               <form class="form-horizontal" action = "../functions/functions.php" method="POST"  enctype="multipart/form-data">
                 <div class="card-body">
                 <div class="form-group">
@@ -78,10 +80,11 @@
                 
                 <!-- /.card-body -->
                 <div class="card-footer">
-                  <button type="submit" name = "insert_product_to_db" class="btn btn-info">ایجاد کردن</button>
+                  <button type="submit" name = "update_product_to_db" class="btn btn-info">ایجاد کردن</button>
                 </div>
                 <!-- /.card-footer -->
               </form>
+              <?php endwhile;?>
             </div>
     </div>
 

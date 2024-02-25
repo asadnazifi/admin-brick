@@ -180,6 +180,41 @@ function join_date_in_db($name_tabel_one,$select_date_tabel_one,$name_tabel_to,$
     //ریترن نتیجه یا هر چیزی که نیاز است
     return $results;
 }
+function uplode_file($name_file){
+    $target_dir = "../uploads_img_product/"; 
+    $target_file = $target_dir . basename($name_file["name"]);
+    $uploadOk = 1;
+    $imageFileType = strtolower(pathinfo($target_file,PATHINFO_EXTENSION));
+
+    
+
+    if ($name_file["size"] > 5000000) {
+        session_start();
+        set_flash_message("اندازه فایل بیشتز ار حد مجاز");
+        $uploadOk = 0;
+        reddirckt_back_url();
+    }
+
+    if($imageFileType != "jpg" && $imageFileType != "jpeg" && $imageFileType != "png" && $imageFileType != "gif" ) {
+        session_start();
+        set_flash_message("تنها فایل‌های JPG, JPEG, PNG یا GIF مجاز هستند.");
+        $uploadOk = 0;
+        reddirckt_back_url();
+        
+    }
+
+    if ($uploadOk == 0) {
+        session_start();
+        set_flash_message("فایل اپلود نشد");
+        reddirckt_back_url();
+    } else {
+        if (move_uploaded_file($name_file["tmp_name"], $target_file)) {
+        return basename($name_file["name"]);
+        } else {
+            return false;
+        }
+    }
+}
 
 if(isset($_GET['user_delete'])){
     $user_id = intval($_GET['user_delete']);
@@ -272,6 +307,50 @@ if(isset($_POST['update_categorie_to_db'])){
         set_flash_message("دسته بندی با موفقیت ویرایش شد");
         header("Location: http://localhost/admin-brick/template/list-categories.php");
 
+    }
+}
+if(isset($_POST['insert_product_to_db'])){
+    if(!isset($_POST['name_product']) || empty($_POST['name_product'])){
+        session_start();
+        set_flash_message("نام محصول الزامی است");
+        reddirckt_back_url();
+
+    }elseif(!isset($_POST['price']) || empty($_POST['price'])){
+        session_start();
+        set_flash_message("قیمت محصول  الزامی می باشد");
+        reddirckt_back_url();
+    }elseif(!isset($_POST['description_long_text']) || empty($_POST['description_long_text'])){
+        session_start();
+        set_flash_message("توضیحات کوتاه الزامی می باشد");
+        reddirckt_back_url();
+    }elseif(!isset($_POST['description_text']) || empty($_POST['description_text'])){
+        session_start();
+        set_flash_message("توضیحات الزامی می باشد");
+        reddirckt_back_url();
+    }
+    elseif(!isset($_FILES['img_url']) || empty($_FILES['img_url'])){
+        session_start();
+        set_flash_message("عکس محصول الزامی می باشد");
+        reddirckt_back_url();
+    }
+    $img_url = uplode_file($_FILES['img_url']);
+    $coulemn = ['name_product','price','img_url','categories_id','description','description_long'];
+    $value = [$_POST['name_product'],$_POST['price'],$img_url,$_POST['categories'],$_POST['description_text'],$_POST['description_long_text']];
+    $resulte = insert_date_in_to_db("products",$coulemn,$value);
+    if($resulte){
+        session_start();
+        set_flash_message("محصول با موفقیت ایجاد شد");
+        header('Location: http://localhost/admin-brick/template/list-products.php');
+
+    }
+}
+if(isset($_GET['product_delete'])){
+    $product_id = intval($_GET['product_delete']);
+    $query_result = delete_data_in_db($product_id ,"products","product_id");
+    if($query_result){
+        session_start();
+        set_flash_message("محصول با موفقیت حذف شد");
+        header('Location: http://localhost/admin-brick/template/list-products.php');
     }
 }
 
