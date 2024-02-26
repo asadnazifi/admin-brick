@@ -58,10 +58,10 @@ loginCheckAndRedirect("template/login.php");
         <!-- Sidebar user panel (optional) -->
         <div class="user-panel mt-3 pb-3 mb-3 d-flex">
           <div class="image">
-            <img src="https://www.gravatar.com/avatar/52f0fbcbedee04a121cba8dad1174462?s=200&d=mm&r=g" class="img-circle elevation-2" alt="User Image">
+          <i class="fa fa-user img-circle elevation-2"></i>
           </div>
           <div class="info">
-            <a href="#" class="d-block">حسام موسوی</a>
+            <a href="#" class="d-block"> ادمین</a>
           </div>
         </div>
 
@@ -71,10 +71,19 @@ loginCheckAndRedirect("template/login.php");
             <!-- Add icons to the links using the .nav-icon class
                  with font-awesome or any other icon font library -->
             <li class="nav-item has-treeview menu-open">
-              <a href="#" class="nav-link active">
-                <i class="nav-icon fa fa-dashboard"></i>
+              <a href="http://<?php echo $_SERVER['HTTP_HOST'];?>/admin-brick" class="nav-link ">
+                <i class="nav-icon fa fa-"></i>
                 <p>
                   پنل ادمین
+                </p>
+              </a>
+            
+            </li>
+            <li class="nav-item has-treeview menu-open">
+              <a href="http://<?php echo $_SERVER['HTTP_HOST'];?>/Brick" class="nav-link ">
+                <i class="nav-icon fa fa-dashboard"></i>
+                <p>
+                  بازدید سایت
                 </p>
               </a>
             
@@ -159,154 +168,13 @@ loginCheckAndRedirect("template/login.php");
               </a>
               <ul class="nav nav-treeview">
                 <li class="nav-item">
-                  <a href="pages/tables/simple.html" class="nav-link">
+                  <a href="http://<?php echo $_SERVER['HTTP_HOST'];?>/admin-brick/template/list-order.php" class="nav-link">
                     <i class="fa fa-circle-o nav-icon"></i>
                     <p>لیست سفارشات</p>
                   </a>
                 </li>
                
               </ul>
-            </li>
-            <li class="nav-header">مثال‌ها</li>
-            <li class="nav-item">
-              <a href="pages/calendar.html" class="nav-link">
-                <i class="nav-icon fa fa-calendar"></i>
-                <p>
-                  تقویم
-                  <span class="badge badge-info right">2</span>
-                </p>
-              </a>
-            </li>
-            <li class="nav-item has-treeview">
-              <a href="#" class="nav-link">
-                <i class="nav-icon fa fa-envelope-o"></i>
-                <p>
-                  ایمیل‌ باکس
-                  <i class="fa fa-angle-left right"></i>
-                </p>
-              </a>
-              <ul class="nav nav-treeview">
-                <li class="nav-item">
-                  <a href="pages/mailbox/mailbox.html" class="nav-link">
-                    <i class="fa fa-circle-o nav-icon"></i>
-                    <p>اینباکس</p>
-                  </a>
-                </li>
-                <li class="nav-item">
-                  <a href="pages/mailbox/compose.html" class="nav-link">
-                    <i class="fa fa-circle-o nav-icon"></i>
-                    <p>ایجاد</p>
-                  </a>
-                </li>
-                <li class="nav-item">
-                  <a href="pages/mailbox/read-mail.html" class="nav-link">
-                    <i class="fa fa-circle-o nav-icon"></i>
-                    <p>خواندن</p>
-                  </a>
-                </li>
-              </ul>
-            </li>
-            <li class="nav-item has-treeview">
-              <a href="#" class="nav-link">
-                <i class="nav-icon fa fa-book"></i>
-                <p>
-                  صفحات
-                  <i class="fa fa-angle-left right"></i>
-                </p>
-              </a>
-              <ul class="nav nav-treeview">
-                <li class="nav-item">
-                  <a href="pages/examples/invoice.html" class="nav-link">
-                    <i class="fa fa-circle-o nav-icon"></i>
-                    <p>سفارشات</p>
-                  </a>
-                </li>
-                <li class="nav-item">
-                  <a href="pages/examples/profile.html" class="nav-link">
-                    <i class="fa fa-circle-o nav-icon"></i>
-                    <p>پروفایل</p>
-                  </a>
-                </li>
-                <li class="nav-item">
-                  <a href="pages/examples/login.html" class="nav-link">
-                    <i class="fa fa-circle-o nav-icon"></i>
-                    <p>صفحه ورود</p>
-                  </a>
-                </li>
-                <li class="nav-item">
-                  <a href="pages/examples/register.html" class="nav-link">
-                    <i class="fa fa-circle-o nav-icon"></i>
-                    <p>صفحه عضویت</p>
-                  </a>
-                </li>
-                <li class="nav-item">
-                  <a href="pages/examples/lockscreen.html" class="nav-link">
-                    <i class="fa fa-circle-o nav-icon"></i>
-                    <p>قفل صفحه</p>
-                  </a>
-                </li>
-              </ul>
-            </li>
-            <li class="nav-item has-treeview">
-              <a href="#" class="nav-link">
-                <i class="nav-icon fa fa-plus-square-o"></i>
-                <p>
-                  بیشتر
-                  <i class="fa fa-angle-left right"></i>
-                </p>
-              </a>
-              <ul class="nav nav-treeview">
-                <li class="nav-item">
-                  <a href="pages/examples/404.html" class="nav-link">
-                    <i class="fa fa-circle-o nav-icon"></i>
-                    <p>ارور 404</p>
-                  </a>
-                </li>
-                <li class="nav-item">
-                  <a href="pages/examples/500.html" class="nav-link">
-                    <i class="fa fa-circle-o nav-icon"></i>
-                    <p>ارور 500</p>
-                  </a>
-                </li>
-                <li class="nav-item">
-                  <a href="pages/examples/blank.html" class="nav-link">
-                    <i class="fa fa-circle-o nav-icon"></i>
-                    <p>صفحه خالی</p>
-                  </a>
-                </li>
-                <li class="nav-item">
-                  <a href="starter.html" class="nav-link">
-                    <i class="fa fa-circle-o nav-icon"></i>
-                    <p>صفحه شروع</p>
-                  </a>
-                </li>
-              </ul>
-            </li>
-            <li class="nav-header">متفاوت</li>
-            <li class="nav-item">
-              <a href="#" class="nav-link">
-                <i class="nav-icon fa fa-file"></i>
-                <p>مستندات</p>
-              </a>
-            </li>
-            <li class="nav-header">برچسب‌ها</li>
-            <li class="nav-item">
-              <a href="#" class="nav-link">
-                <i class="nav-icon fa fa-circle-o text-danger"></i>
-                <p class="text">مهم</p>
-              </a>
-            </li>
-            <li class="nav-item">
-              <a href="#" class="nav-link">
-                <i class="nav-icon fa fa-circle-o text-warning"></i>
-                <p>هشدار</p>
-              </a>
-            </li>
-            <li class="nav-item">
-              <a href="#" class="nav-link">
-                <i class="nav-icon fa fa-circle-o text-info"></i>
-                <p>اطلاعات</p>
-              </a>
             </li>
           </ul>
         </nav>

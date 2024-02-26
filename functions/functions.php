@@ -205,6 +205,20 @@ function uplode_file($name_file){
         }
     
 }
+function join_data_to_data_select_db(){
+    require_once $_SERVER['DOCUMENT_ROOT'] . "/admin-brick/functions/contect-to-db.php";
+    $query_select_join = "SELECT * FROM orders JOIN products ON orders.product_id = products.product_id JOIN users ON orders.user_id = users.user_id";
+    $query_result = $conn->query($query_select_join);
+    
+    if ($query_result->num_rows > 0) {
+        $results = $query_result;
+           
+    } else {
+        echo "هیچ نتیجه‌ای یافت نشد";
+    }
+
+    return $results;
+}
 
 if(isset($_GET['user_delete'])){
     $user_id = intval($_GET['user_delete']);
@@ -347,9 +361,9 @@ if(isset($_POST['update_product_to_db'])){
     $form_data = $_POST;
     $primary_key = $_POST['product_id'];
     $table_name = 'products'; 
-    if(!isset($_FILES['img_url'])&empty($_FILES['img_url'])){
+    if(isset($_FILES['img_url'])&!empty($_FILES['img_url']['name'])){
         $adres_url = uplode_file($_FILES['img_url']);
-        $form_data['img_ur;']=$adres_url;
+        $form_data['img_url']=$adres_url;
         $update_result = update_data_in_database($table_name, $primary_key, "product_id",$form_data,'update_product_to_db');
         if($update_result){
             session_start();
