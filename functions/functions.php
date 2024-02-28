@@ -250,6 +250,23 @@ function export_data_where($tabelname, $primery_key,$weher){
 
     return $results;
 }
+function single_product($product_id){
+    require_once $_SERVER['DOCUMENT_ROOT'] . "/admin-brick/functions/contect-to-db.php";
+    $query = "SELECT * FROM products JOIN caetgories ON products.categories_id=caetgories.categore_id WHERE product_id =$product_id";
+    global $conn;
+    $result = $conn->query($query);
+
+
+    if ($result->num_rows > 0) {
+        $results = $result;
+
+    } else {
+        echo "هیچ نتیجه‌ای یافت نشد";
+    }
+
+
+    return $results;
+}
 
 if(isset($_GET['user_delete'])){
     $user_id = intval($_GET['user_delete']);
