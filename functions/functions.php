@@ -220,6 +220,37 @@ function join_data_to_data_select_db(){
     return $results;
 }
 
+function retrieveRecord($input) {
+    require_once $_SERVER['DOCUMENT_ROOT'] . "/admin-brick/functions/contect-to-db.php";
+    global $conn;
+    if ($input === NULL) {
+        $query = "SELECT * FROM caetgories LIMIT 1";
+        $result = $conn->query($query);
+    } else {
+        $query = "SELECT * FROM caetgories WHERE categore_id = '$input'";
+        $result = $conn->query($query);
+    }
+    return $result;
+}
+function export_data_where($tabelname, $primery_key,$weher){
+    require_once $_SERVER['DOCUMENT_ROOT'] . "/admin-brick/functions/contect-to-db.php";
+    global $conn;
+    $query = "SELECT * FROM $tabelname WHERE $primery_key = $weher";
+   
+        $result = $conn->query($query);
+        
+    
+    if ($result->num_rows > 0) {
+        $results = $result;
+           
+    } else {
+        echo "هیچ نتیجه‌ای یافت نشد";
+    }
+   
+
+    return $results;
+}
+
 if(isset($_GET['user_delete'])){
     $user_id = intval($_GET['user_delete']);
     $query_result = delete_data_in_db($user_id ,"users","user_id");
