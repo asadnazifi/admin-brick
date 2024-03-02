@@ -80,7 +80,7 @@ loginCheckAndRedirect("template/login.php");
             
             </li>
             <li class="nav-item has-treeview menu-open">
-              <a href="http://<?php echo $_SERVER['HTTP_HOST'];?>/Brick" class="nav-link ">
+              <a href="http://<?php echo $_SERVER['HTTP_HOST'];?>/Brick2/Brick" class="nav-link ">
                 <i class="nav-icon fa fa-dashboard"></i>
                 <p>
                   بازدید سایت

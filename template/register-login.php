@@ -14,7 +14,7 @@
         if ($row['role'] === 'admin') {
             // اگر کاربر ادمین است، ورود انجام می‌شود
             session_start();
-            $_SESSION['loggedin'] = true;
+            $_SESSION['loggedin'] = 'admin';
             $_SESSION['username'] = $username;
             header("Location: http://localhost/admin-brick");
         } else {

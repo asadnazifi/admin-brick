@@ -2,7 +2,7 @@
 
 function loginCheckAndRedirect($loginPage) {
     session_start();
-    if(isset($_SESSION['loggedin']) && $_SESSION['loggedin'] === true){
+    if(isset($_SESSION['loggedin']) && $_SESSION['loggedin'] === 'admin'){
         // کاربر لاگین کرده است، می‌توانید صفحه مورد نظر را نمایش دهید
         echo "Welcome to the member's area!";
     } else {
@@ -267,6 +267,23 @@ function single_product($product_id){
 
     return $results;
 }
+function select_where($name_tabel,$prymery,$value){
+    require_once $_SERVER['DOCUMENT_ROOT'] . "/admin-brick/functions/contect-to-db.php";
+    $query = "SELECT * FROM `$name_tabel` WHERE `$prymery`=$value";
+    global $conn;
+    $result = $conn->query($query);
+
+
+    if ($result->num_rows > 0) {
+        $results = $result;
+
+    } else {
+        echo "هیچ نتیجه‌ای یافت نشد";
+    }
+
+
+    return $results;
+}
 
 if(isset($_GET['user_delete'])){
     $user_id = intval($_GET['user_delete']);
@@ -428,6 +445,39 @@ if(isset($_POST['update_product_to_db'])){
         header("Location: http://localhost/admin-brick/template/list-products.php");
 
     }
+}
+if (isset($_POST['user_login'])){
+    require_once $_SERVER['DOCUMENT_ROOT'] . "/admin-brick/functions/contect-to-db.php";
+    if ($_SERVER["REQUEST_METHOD"] == "POST") {
+        $username = $_POST['username'];
+        $password = $_POST['password'];
+        $sql = "SELECT * FROM users WHERE gmail = '$username' and password = '$password'";
+        $result = mysqli_query($conn, $sql);
+
+        if (mysqli_num_rows($result) == 1) {
+            // کاربر اعتبارسنجی شده است
+            $row = mysqli_fetch_assoc($result);
+            if ($row['role'] === 'admin') {
+                // اگر کاربر ادمین است، ورود انجام می‌شود
+                session_start();
+                $_SESSION['loggedin'] = "admin";
+                $_SESSION['username'] = $username;
+                header("Location: http://localhost/admin-brick");
+            } else {
+                // اگر کاربر معمولی است، ورود انجام می‌شود
+                session_start();
+                $_SESSION['loggedin'] = 'user';
+                $_SESSION['username'] = $row['firstname'];
+                header("Location: http://localhost/brick2/brick");
+            }
+        } else {
+            session_start();
+            set_flash_message("نام کاربری یا کلمه عبور اشتباه است");
+            reddirckt_back_url();
+        }
+        mysqli_close($conn);
+    }
+
 }
 
 
