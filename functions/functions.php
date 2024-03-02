@@ -479,5 +479,39 @@ if (isset($_POST['user_login'])){
     }
 
 }
+if (isset($_POST['register_user'])){
+    if(!isset($_POST['firstname']) || empty($_POST['firstname'])){
+        session_start();
+        set_flash_message("نام کاربری الزامی می باشد");
+        reddirckt_back_url();
+
+    }elseif(!isset($_POST['lastname']) || empty($_POST['lastname'])){
+        session_start();
+        set_flash_message("نام خانوادگی الزامی می باشد");
+        reddirckt_back_url();
+    }elseif(!isset($_POST['gmail']) || empty($_POST['gmail'])){
+        session_start();
+        set_flash_message("ایمیل الزامی می باشد");
+        reddirckt_back_url();
+    }elseif(!isset($_POST['passwords']) || empty($_POST['passwords'])){
+        session_start();
+        set_flash_message("رمزعبور الزامی می باشد");
+        reddirckt_back_url();
+    }elseif($_POST['passwords'][0]!== $_POST['passwords'][1]){
+        session_start();
+        set_flash_message("رمزعبور باهم مطابقت ندارد");
+        reddirckt_back_url();
+    }
+    $coulemn = ['firstname','lastname','gmail','password'];
+    $value = [$_POST['firstname'],$_POST['lastname'],$_POST['gmail'],$_POST['passwords'][0]];
+    $resulte = insert_date_in_to_db("users",$coulemn,$value);
+    if($resulte){
+        session_start();
+        $_SESSION['loggedin'] = 'user';
+        $_SESSION['username'] = $_POST['firstname'];
+        header("Location: http://localhost/brick");
+
+    }
+}
 
 
