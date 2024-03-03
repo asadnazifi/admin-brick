@@ -469,7 +469,7 @@ if (isset($_POST['user_login'])){
                 $_SESSION['loggedin'] = 'user';
                 $_SESSION['username'] = $row['firstname'];
                 $_SESSION['user_id'] = $row['user_id'];
-                header("Location: http://localhost/brick2/brick");
+                header("Location: http://localhost/brick");
             }
         } else {
             session_start();
@@ -549,6 +549,12 @@ if (isset($_POST['order_submit'])){
         set_flash_message("برای ثبت سفارش حتما باید وارد شوید");
         reddirckt_back_url();
     }
+
+}
+if (isset($_GET['session_delete'])){
+    session_start();
+    session_destroy();
+    reddirckt_back_url();
 
 }
 
