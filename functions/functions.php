@@ -468,6 +468,7 @@ if (isset($_POST['user_login'])){
                 session_start();
                 $_SESSION['loggedin'] = 'user';
                 $_SESSION['username'] = $row['firstname'];
+                $_SESSION['user_id'] = $row['user_id'];
                 header("Location: http://localhost/brick2/brick");
             }
         } else {
@@ -509,9 +510,46 @@ if (isset($_POST['register_user'])){
         session_start();
         $_SESSION['loggedin'] = 'user';
         $_SESSION['username'] = $_POST['firstname'];
+        $_SESSION['user_id'] = $resulte;
         header("Location: http://localhost/brick");
 
     }
+}
+if (isset($_POST['order_submit'])){
+    session_start();
+    if (isset($_SESSION['loggedin'])){
+        if(!isset($_POST['name_product']) || empty($_POST['name_product'])){
+            session_start();
+            set_flash_message("نام محصول الزامی می باشد");
+            reddirckt_back_url();
+
+        }elseif(!isset($_POST['count_product']) || empty($_POST['count_product'])){
+            session_start();
+            set_flash_message("مقدار محصول الزامی می باشد");
+            reddirckt_back_url();
+        }elseif(!isset($_POST['adres']) || empty($_POST['adres'])){
+            session_start();
+            set_flash_message("آدرس الزامی می باشد");
+            reddirckt_back_url();
+        }elseif(!isset($_POST['phone']) || empty($_POST['phone'])){
+            session_start();
+            set_flash_message("شماره تماس الزامی می باشد");
+            reddirckt_back_url();
+        }
+        $coulemn = ['product_id','adress_sent','phone','user_id','count'];
+        $value = [$_POST['product_id'],$_POST['adres'],$_POST['phone'],$_POST['user_id'],$_POST['count_product']];
+        $resulte = insert_date_in_to_db("orders",$coulemn,$value);
+        if($resulte){
+            session_start();
+            set_flash_message("سفارش با موفقیت ثبت شد");
+            reddirckt_back_url();
+        }
+    }else{
+        session_start();
+        set_flash_message("برای ثبت سفارش حتما باید وارد شوید");
+        reddirckt_back_url();
+    }
+
 }
 
 
