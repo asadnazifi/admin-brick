@@ -159,13 +159,15 @@ loginCheckAndRedirect("template/login.php");
               </ul>
             </li>
             <li class="nav-item has-treeview">
-              <a href="#" class="nav-link">
-                <i class="nav-icon fa fa-table"></i>
-                <p>
-                  سفارشات
-                  <i class="fa fa-angle-left right"></i>
-                </p>
-              </a>
+                <a href="pages/widgets.html" class="nav-link">
+                    <i class="nav-icon fa fa-th"></i>
+                    <p>
+                        سفارشات
+                        <?php $rows=count_order_new()->fetch_assoc();?>
+                        <span class="right badge badge-danger"><?php echo $rows['unpade_count'];?></span>
+                    </p>
+                </a>
+
               <ul class="nav nav-treeview">
                 <li class="nav-item">
                   <a href="http://<?php echo $_SERVER['HTTP_HOST'];?>/admin-brick/template/list-order.php" class="nav-link">

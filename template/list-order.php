@@ -23,6 +23,7 @@
                             <th>نام محصول</th>
                             <th>قیمت محصول</th>
                             <th>آدرس خرید</th>
+                            <th>شماره تماس </th>
                             <th>وضعیت خرید</th>
                             <th>عملیات</th>
                         
@@ -37,10 +38,19 @@
                             <td><?php echo $row['name_product'];?></td>
                             <td><?php echo $row['price'];?></td>
                             <td><?php echo $row['adress_sent'];?></td>
-                            <td><?php echo $row['statuus'];?></td>
+                            <td><?php echo $row['phone'];?></td>
+                            <?php if ($row['statuus']=='pade'):?>
+                                <td><span class="badge badge-success">تکمیل شده</span></td>
+                            <?php else:?>
+                                <td><span class="badge badge-danger">تکمیل نشده</span></td>
+
+                            <?php endif;?>
+
 
                             <td>
-                                <a href="edit-product.php?edit_product=<?php echo $row['product_id']; ?>"><i class="nav-icon fa fa-edit"></i></a>
+                                <?php if ($row['statuus']=="unpade"):?>
+                                    <a href="edit-product.php?update_order=<?php echo $row['order_id']; ?>"><i class="nav-icon fa fa-check"></i></a>
+                                <?php endif;?>
                                 <a href="../functions/functions.php?product_delete=<?php echo $row['product_id']; ?>"><i class="nav-icon fa fa-trash"></i></a>
                             </td>
                             

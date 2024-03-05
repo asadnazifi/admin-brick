@@ -208,6 +208,7 @@ function uplode_file($name_file){
 function join_data_to_data_select_db(){
     require_once $_SERVER['DOCUMENT_ROOT'] . "/admin-brick/functions/contect-to-db.php";
     $query_select_join = "SELECT * FROM orders JOIN products ON orders.product_id = products.product_id JOIN users ON orders.user_id = users.user_id";
+    global $conn;
     $query_result = $conn->query($query_select_join);
     
     if ($query_result->num_rows > 0) {
@@ -283,6 +284,14 @@ function select_where($name_tabel,$prymery,$value){
 
 
     return $results;
+}
+function count_order_new(){
+    require_once $_SERVER['DOCUMENT_ROOT'] . "/admin-brick/functions/contect-to-db.php";
+    $query = "SELECT COUNT(*) AS unpade_count FROM orders WHERE statuus = 'unpade'";
+    global $conn;
+    $result = $conn->query($query);
+
+    return $result;
 }
 
 if(isset($_GET['user_delete'])){
@@ -555,6 +564,18 @@ if (isset($_GET['session_delete'])){
     session_start();
     session_destroy();
     reddirckt_back_url();
+
+}
+if (isset($_GET['update_order'])){
+    $order_id = $_GET['update_order'];
+    require_once $_SERVER['DOCUMENT_ROOT'] . "/admin-brick/functions/contect-to-db.php";
+    $query_upadete = "UPDATE `orders` SET `statuus` = 'pade' WHERE `orders`.`order_id` =$order_id ";
+    $resulte = $conn->query($query_upadete);
+    if ($resulte){
+        session_start();
+        set_flash_message("وضعیت سفارش تایید شد");
+        reddirckt_back_url();
+    }
 
 }
 
