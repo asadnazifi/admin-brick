@@ -1,5 +1,5 @@
 <footer class="main-footer">
-    <strong>CopyLeft &copy; 2018 <a href="http://github.com/hesammousavi/">حق کپی رایت محفوض</a>.</strong>
+  
   </footer>
 
   <!-- Control Sidebar -->

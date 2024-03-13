@@ -98,6 +98,7 @@ if (!empty($previous_page)) {
 }
 function delete_data_in_db ($id , $coulem_name, $tabel_name){
     require_once $_SERVER['DOCUMENT_ROOT'] . "/admin-brick/functions/contect-to-db.php";
+    global $conn;
     $query_delete_user = "DELETE FROM $coulem_name WHERE $tabel_name =$id";
     $query_result = $conn->query($query_delete_user);
     return $query_result;
@@ -121,6 +122,7 @@ function insert_date_in_to_db($column ,$taebal_names,$values){
 }
 function edit_data_db($coulem_name,$select_tabel,$equal_where_tabel){
     require_once $_SERVER['DOCUMENT_ROOT'] . "/admin-brick/functions/contect-to-db.php";
+    global $conn;
     $query_edit ="SELECT * FROM $coulem_name WHERE $select_tabel = $equal_where_tabel";
     $query_result = $conn->query($query_edit);
     
@@ -158,6 +160,7 @@ function update_data_in_database($table_name, $primary_key,$name_primary_key, $f
 }
 function join_date_in_db($name_tabel_one,$select_date_tabel_one,$name_tabel_to,$select_data_tabel_to,$primery_tabel_one,$primery_tabel_to){
     require_once $_SERVER['DOCUMENT_ROOT'] . "/admin-brick/functions/contect-to-db.php";
+    global $conn;
     $query_join = "SELECT $name_tabel_one.$select_date_tabel_one, $name_tabel_to.$select_data_tabel_to FROM $name_tabel_one JOIN $name_tabel_to ON $name_tabel_one.$primery_tabel_one = $name_tabel_to.$primery_tabel_to";
     $query_result = $conn->query($query_join);
     
@@ -292,6 +295,21 @@ function count_order_new(){
     $result = $conn->query($query);
 
     return $result;
+}function count_user(){
+    require_once $_SERVER['DOCUMENT_ROOT'] . "/admin-brick/functions/contect-to-db.php";
+    $query = "SELECT COUNT(*) AS user_count FROM users ";
+    global $conn;
+    $result = $conn->query($query);
+
+    return $result;
+}
+function count_visits(){
+    require_once $_SERVER['DOCUMENT_ROOT'] . "/admin-brick/functions/contect-to-db.php";
+    $query = "SELECT COUNT(*) AS visits_count FROM visits ";
+    global $conn;
+    $result = $conn->query($query);
+
+    return $result;
 }
 
 if(isset($_GET['user_delete'])){
@@ -303,6 +321,47 @@ if(isset($_GET['user_delete'])){
         header('Location: http://localhost/admin-brick/template/list-users.php');
     }
 }
+
+// اتصال به پایگاه داده
+require_once $_SERVER['DOCUMENT_ROOT'] . "/admin-brick/functions/contect-to-db.php";
+global $conn;
+
+function check_ip_exists($ip)
+{
+    global $conn;
+
+    $query = "SELECT * FROM visits WHERE ip_address = '$ip'";
+    $result = $conn->query($query);
+
+    if ($result->num_rows > 0) {
+        return true; // IP تکراری وجود دارد
+    } else {
+        return false; // IP تکراری وجود ندارد
+    }
+}
+
+function log_visit()
+{
+    global $conn;
+
+    $ip_address = $_SERVER['REMOTE_ADDR']; // آدرس IP کاربر
+    $visit_time = date('Y-m-d H:i:s'); // زمان بازدید
+
+    // بررسی وجود IP در جدول visits
+    if (!check_ip_exists($ip_address)) {
+        // ثبت بازدید در صورت عدم وجود IP تکراری
+        $query = "INSERT INTO visits (ip_address, visit_time) VALUES ('$ip_address', '$visit_time')";
+
+        if ($conn->query($query) === TRUE) {
+
+        } else {
+            echo "خطا در ثبت بازدید: " . $conn->error;
+        }
+    } else {
+
+    }
+}
+
 if(isset($_POST['insert_user_to_db'])){
     if(!isset($_POST['firstname']) || empty($_POST['firstname'])){
         session_start();
@@ -577,6 +636,15 @@ if (isset($_GET['update_order'])){
         reddirckt_back_url();
     }
 
+}
+if(isset($_GET['order_delete'])){
+    $order_id = intval($_GET['order_delete']);
+    $query_result = delete_data_in_db($order_id ,"orders","order_id");
+    if($query_result){
+        session_start();
+        set_flash_message("سفارش با موفقیت حذف شد");
+        reddirckt_back_url();
+    }
 }
 
 

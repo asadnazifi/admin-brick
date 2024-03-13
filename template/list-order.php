@@ -51,7 +51,7 @@
                                 <?php if ($row['statuus']=="unpade"):?>
                                     <a href="edit-product.php?update_order=<?php echo $row['order_id']; ?>"><i class="nav-icon fa fa-check"></i></a>
                                 <?php endif;?>
-                                <a href="../functions/functions.php?product_delete=<?php echo $row['product_id']; ?>"><i class="nav-icon fa fa-trash"></i></a>
+                                <a href="../functions/functions.php?order_delete=<?php echo $row['order_id']; ?>"><i class="nav-icon fa fa-trash"></i></a>
                             </td>
                             
                         </tr>
