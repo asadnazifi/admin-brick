@@ -141,15 +141,29 @@ function edit_data_db($coulem_name,$select_tabel,$equal_where_tabel){
 }
 function update_data_in_database($table_name, $primary_key,$name_primary_key, $form_data ,$not_to_form) {
     require_once $_SERVER['DOCUMENT_ROOT'] . "/admin-brick/functions/contect-to-db.php";
-
+    global $conn ;
     $updates = [];
-    foreach ($form_data as $key => $value) {
-        $escaped_value = $conn->real_escape_string($value);
-        if($key !=$not_to_form){
-            $updates[] = "$key = '$escaped_value'";
+
+    if (array_key_exists('slider',$form_data)){
+        foreach ($form_data as $key => $value) {
+            $escaped_value = $conn->real_escape_string($value);
+            if($key !=$not_to_form){
+                $updates[] = "$key = '$escaped_value'";
+            }
+
         }
-        
+    }else{
+        foreach ($form_data as $key => $value) {
+            $escaped_value = $conn->real_escape_string($value);
+            if($key !=$not_to_form){
+                $updates[] = "$key = '$escaped_value'";
+            }
+            $updates[] = "slider = 'null'";
+
+        }
+
     }
+
 
     $set_clause = implode(", ", $updates);
 
@@ -471,8 +485,8 @@ if(isset($_POST['insert_product_to_db'])){
         reddirckt_back_url();
     }
     $img_url = uplode_file($_FILES['img_url']);
-    $coulemn = ['name_product','price','img_url','categories_id','description','description_long'];
-    $value = [$_POST['name_product'],$_POST['price'],$img_url,$_POST['categories'],$_POST['description_text'],$_POST['description_long_text']];
+    $coulemn = ['name_product','price','img_url','categories_id','description','description_long','slider'];
+    $value = [$_POST['name_product'],$_POST['price'],$img_url,$_POST['categories'],$_POST['description_text'],$_POST['description_long_text'],$_POST['slider']];
     $resulte = insert_date_in_to_db("products",$coulemn,$value);
     if($resulte){
         session_start();

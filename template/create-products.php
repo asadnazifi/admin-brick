@@ -41,6 +41,7 @@
                       <textarea class="form-control" name = "description_long_text" id="description_long_text" cols="30" rows="10">توضیحات کوتاه محصول</textarea>
                     </div>
                   </div>
+
                   <div class="form-group">
                     <label for="description_text" class="col-sm-2 control-label">توضیحات محصول</label>
 
@@ -72,6 +73,10 @@
                       
                     </select>
                   </div>
+                        <div class="form-check">
+                            <input type="checkbox" class="form-check-input" id="exampleCheck2" name="slider">
+                            <label class="form-check-label" for="exampleCheck2">نمایش در اسلایدر</label>
+                        </div>
 
                   </div>
                   </div>

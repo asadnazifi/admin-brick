@@ -77,7 +77,10 @@
                     <?php endwhile;?>
                     </select>
                   </div>
-
+                        <div class="form-check">
+                            <input type="checkbox" class="form-check-input" id="exampleCheck2" name="slider" <?php if ($row['slider']=="on") echo "checked";?>>
+                            <label class="form-check-label" for="exampleCheck2">نمایش در اسلایدر</label>
+                        </div>
                   </div>
                   </div>
                 
