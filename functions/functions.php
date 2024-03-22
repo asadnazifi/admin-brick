@@ -660,5 +660,28 @@ if(isset($_GET['order_delete'])){
         reddirckt_back_url();
     }
 }
+if (isset($_POST)){
+    $data = json_decode(file_get_contents("php://input"), true);
+    if (isset($data['product_id'])){
+        session_start();
+        if (isset($_SESSION['cart']) & array_key_exists($data['product_id'],$_SESSION['cart'])){
+                $_SESSION['cart'][$data['product_id']]['count']+=1;
+                var_dump($_SESSION['cart'][$data['product_id']]['count']);
+        }else{
+            $products= select_where('products','product_id',$data['product_id']);
+            $products = $products->fetch_assoc();
+            $_SESSION['cart']=[$products['product_id']=>
+                [
+                    'name_product'=>$products['name_product'],
+                    'count' => 1,
+                    'price'=>$products['price'],
+                ]
+            ];
+            echo "ok";
+        }
 
+
+
+    }
+}
 
