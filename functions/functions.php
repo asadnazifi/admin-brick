@@ -237,7 +237,34 @@ function join_data_to_data_select_db(){
 
     return $results;
 }
+function slider_return(){
+    require_once $_SERVER['DOCUMENT_ROOT'] . "/admin-brick/functions/contect-to-db.php";
+    global $conn;
+    $query_slider = "SELECT img_url FROM `products` WHERE slider='on' ORDER BY product_id DESC LIMIT 3";
+    $query_result = $conn->query($query_slider);
+    if ($query_result->num_rows > 0) {
+        $results = $query_result;
 
+    } else {
+        echo "هیچ نتیجه‌ای یافت نشد";
+    }
+
+    return $results;
+}
+function sell_price(){
+    require_once $_SERVER['DOCUMENT_ROOT'] . "/admin-brick/functions/contect-to-db.php";
+    global $conn;
+    $query_slider = "SELECT * FROM `products` WHERE sell_price >0 ORDER BY product_id DESC LIMIT 10";
+    $query_result = $conn->query($query_slider);
+    if ($query_result->num_rows > 0) {
+        $results = $query_result;
+
+    } else {
+        echo "هیچ نتیجه‌ای یافت نشد";
+    }
+
+    return $results;
+}
 function retrieveRecord($input) {
     require_once $_SERVER['DOCUMENT_ROOT'] . "/admin-brick/functions/contect-to-db.php";
     global $conn;
@@ -485,8 +512,8 @@ if(isset($_POST['insert_product_to_db'])){
         reddirckt_back_url();
     }
     $img_url = uplode_file($_FILES['img_url']);
-    $coulemn = ['name_product','price','img_url','categories_id','description','description_long','slider'];
-    $value = [$_POST['name_product'],$_POST['price'],$img_url,$_POST['categories'],$_POST['description_text'],$_POST['description_long_text'],$_POST['slider']];
+    $coulemn = ['name_product','price','img_url','categories_id','description','description_long','slider','sell_price'];
+    $value = [$_POST['name_product'],$_POST['price'],$img_url,$_POST['categories'],$_POST['description_text'],$_POST['description_long_text'],$_POST['slider'],$_POST['sell_price']];
     $resulte = insert_date_in_to_db("products",$coulemn,$value);
     if($resulte){
         session_start();

@@ -37,6 +37,11 @@
                       <input type="hidden" class="form-control" name="product_id" value = "<?php echo $row['product_id'];?>">
 
                     </div>
+                      <label for="sell_price" class="col-sm-2 control-label">تخفیف محصول بر اساس درصد</label>
+
+                      <div class="col-sm-10">
+                          <input type="number" class="form-control" name="sell_price" id="sell_price" value = "<?php echo $row['sell_price'];?>" placeholder="درصد محصول را وراد کنید %">
+                      </div>
                   </div>
                   <div class="form-group">
                     <label for="description_long_text" class="col-sm-2 control-label">توضیحات کوتاه محصول</label>

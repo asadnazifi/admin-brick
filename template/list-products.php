@@ -27,6 +27,7 @@
                             <th>عکس محصول</th>
                             <th>دسته بندی</th>
                             <th>نمایش در اسلایدر</th>
+                            <th>درصد تخفیف</th>
                             <th>عملیات</th>
                         
                         </tr>
@@ -41,10 +42,12 @@
                             <td><img width="40" height="40" src="http://<?php echo $_SERVER['HTTP_HOST'];?>/admin-brick/uploads_img_product/<?php echo $row['img_url'];?>" alt=""></td>
                             <td><span class="badge badge-success"><?php echo $row['name_categore'];?></span></td>
                             <?php if ($row['slider']=="on"):?>
-                            <td><i class="nav-icon fa fa-check"></i></td>
+                                <td><span class="badge badge-success"><i class="nav-icon fa fa-check"></i></span></td>
                             <?php else:?>
-                            <td><i class="nav-icon fa fa-remove"></i></td>
+                                <td><span class="badge badge-danger"><i class="nav-icon fa fa-remove"></i></span></td>
                             <?php endif;?>
+                            <td><span class="badge badge-danger">%<?php echo $row['sell_price'];?></span></td>
+
                             <td>
                                 <a href="edit-product.php?edit_product=<?php echo $row['product_id']; ?>"><i class="nav-icon fa fa-edit"></i></a>
                                 <a href="../functions/functions.php?product_delete=<?php echo $row['product_id']; ?>"><i class="nav-icon fa fa-trash"></i></a>
