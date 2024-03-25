@@ -105,7 +105,7 @@ function delete_data_in_db ($id , $coulem_name, $tabel_name){
 }
 function insert_date_in_to_db($column ,$taebal_names,$values){
     require_once $_SERVER['DOCUMENT_ROOT'] . "/admin-brick/functions/contect-to-db.php";
-
+    global $conn;
    
     $table_names = implode(",", $taebal_names);
 
@@ -158,7 +158,7 @@ function update_data_in_database($table_name, $primary_key,$name_primary_key, $f
             if($key !=$not_to_form){
                 $updates[] = "$key = '$escaped_value'";
             }
-            $updates[] = "slider = 'null'";
+
 
         }
 
@@ -264,6 +264,13 @@ function sell_price(){
     }
 
     return $results;
+}
+function ressult_product_user(){
+    require_once $_SERVER['DOCUMENT_ROOT'] . "/admin-brick/functions/contect-to-db.php";
+    global $conn;
+    $query_product = "SELECT * FROM products WHERE sell_price=0 AND slider ='null' ORDER BY product_id DESC LIMIT 8";
+    $query_return = $conn->query($query_product);
+    return $query_return;
 }
 function retrieveRecord($input) {
     require_once $_SERVER['DOCUMENT_ROOT'] . "/admin-brick/functions/contect-to-db.php";
@@ -513,7 +520,12 @@ if(isset($_POST['insert_product_to_db'])){
     }
     $img_url = uplode_file($_FILES['img_url']);
     $coulemn = ['name_product','price','img_url','categories_id','description','description_long','slider','sell_price'];
-    $value = [$_POST['name_product'],$_POST['price'],$img_url,$_POST['categories'],$_POST['description_text'],$_POST['description_long_text'],$_POST['slider'],$_POST['sell_price']];
+    if (isset($_POST['slider'])){
+        $slider = $_POST['slider'];
+    }else{
+        $slider = 'null';
+    }
+    $value = [$_POST['name_product'],$_POST['price'],$img_url,$_POST['categories'],$_POST['description_text'],$_POST['description_long_text'],$slider,$_POST['sell_price']];
     $resulte = insert_date_in_to_db("products",$coulemn,$value);
     if($resulte){
         session_start();
@@ -578,7 +590,7 @@ if (isset($_POST['user_login'])){
                 $_SESSION['loggedin'] = 'user';
                 $_SESSION['username'] = $row['firstname'];
                 $_SESSION['user_id'] = $row['user_id'];
-                header("Location: http://localhost/brick");
+                header("Location: http://localhost/moten");
             }
         } else {
             session_start();
@@ -700,10 +712,16 @@ if (isset($_POST)){
         } else {
             $products= select_where('products','product_id',$data['product_id']);
             $products = $products->fetch_assoc();
+            if ($products['sell_price']>0){
+                $price = $products['price']*$products['sell_price']/100;
+                $price = $products['price']-$price;
+            }else{
+                $price = $products['price'];
+            }
             $_SESSION['cart'][$products['product_id']] = [
                 'name_product' => $products['name_product'],
                 'count' => 1,
-                'price' => $products['price'],
+                'price' => $price,
                 'img' => $products['img_url'],
             ];
             echo json_encode($_SESSION['cart']);
